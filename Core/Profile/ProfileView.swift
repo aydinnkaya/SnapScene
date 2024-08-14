@@ -25,7 +25,6 @@ struct ProfileView: View {
         NavigationStack() {
             ScrollView {
                 VStack(spacing: 10){
-                    
                     HStack{
                         Image("aydınKaya")
                             .resizable()
@@ -113,7 +112,7 @@ struct ProfileView: View {
                     Button(action: {}, label: {
                         Image(systemName: "line.3.horizontal")
                             .tint(Color("buttonTextColor"))
-                            
+                        
                     })
                 }
             }
