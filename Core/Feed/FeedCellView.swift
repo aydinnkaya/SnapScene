@@ -12,7 +12,7 @@ struct FeedCellView: View {
         
         // Profile Image and User Name
         HStack(){
-            Image("aydınKaya")
+            Image("aydinKaya")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 80,height: 80)
@@ -21,13 +21,14 @@ struct FeedCellView: View {
             Text("AydınKaya")
                 .font(.footnote)
                 .fontWeight(.semibold)
+                .foregroundStyle(Color("buttonTextColor"))
             
             Spacer()
             
-        }.padding(.leading, 8)
+        }
         
         // Post Image
-        Image("aydınKaya")
+        Image("aydinKaya")
             .resizable()
             .scaledToFill()
             .frame(height: 400)
@@ -84,8 +85,7 @@ struct FeedCellView: View {
         HStack(content: {
             Text("AydınKaya")
                 .fontWeight(.semibold)
-            +
-            Text(" Hello Linkedln Family")
+                        Text(" Hello Linkedln Family")
         })
         .frame(maxWidth: .infinity, alignment: .leading)
         .font(.footnote)

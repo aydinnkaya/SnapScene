@@ -21,12 +21,11 @@ struct ProfileView: View {
     /// <#Description#>
     var body: some View {
         
-        
         NavigationStack() {
             ScrollView {
                 VStack(spacing: 10){
                     HStack{
-                        Image("aydınKaya")
+                        Image("aydinKaya")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 80,height: 80)
@@ -96,8 +95,8 @@ struct ProfileView: View {
                     Divider()
                     
                     LazyVGrid(columns: gridItems, spacing: 1) {
-                        ForEach(0...30, id: \.self){ index in
-                            Image("aydınKaya")
+                        ForEach(0...10, id: \.self){ index in
+                            Image("aydinKaya")
                                 .resizable()
                                 .scaledToFill()
                         }
