@@ -14,7 +14,7 @@ struct FeedView: View {
                 HStack {
                     Button(action: {}, label: {
                         Text("Snap Scene")
-                        //      .font(.custom("Pacifico", size: 30))
+                            .font(.custom("Pacifico", size: 30))
                             .foregroundColor(Color("buttonTextColor"))
                         
                         
