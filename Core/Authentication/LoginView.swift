@@ -14,80 +14,102 @@ struct LoginView: View {
     
     var body: some View {
         NavigationStack{
-            VStack{
-                Spacer()
+            Spacer()
+            
+            Text("Snap Scene")
+                .font(.custom("Pacifico", size: 60))
+                .foregroundColor(Color("buttonTextColor"))
+            
+            VStack(alignment: .center,spacing: 12) {
+                TextField("Enter your email", text: $email)
+                    .textInputAutocapitalization(.none)
+                    .modifier(SCTextFieldModifier())
                 
-                Text("Snap Scene")
-                    .font(.custom("Pacifico", size: 60))
-                    .foregroundColor(Color("buttonTextColor"))
                 
-                VStack(alignment: .center, content: {
-                    TextField("Enter your email", text: $email)
-                        .textInputAutocapitalization(.none)
-                        .font(.subheadline)
-                        .padding(12)
-                        .background(Color(.systemGray6))
-                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)), style: FillStyle())
-                        .padding(.horizontal, 24)
-                    
-                    SecureField("Enter your password", text: $password)
-                        .font(.subheadline)
-                        .padding(12)
-                        .background(Color(.systemGray6))
-                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)), style: FillStyle())
-                        .padding(.horizontal, 24)
-                }).padding(.bottom, 30)
-                
+                SecureFieldWithdButton("Enter your password", text: $password)
               
-                
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Login")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .frame(width: 370, height: 44)
-                        .foregroundStyle(Color("buttonTextColor"))
-                        .overlay(
-                          RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.gray) , lineWidth: 1)
-                         )
-                    
-                }).padding()
-                
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Create Account")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .frame(width: 370, height: 44)
-                        .foregroundStyle(Color("buttonTextColor"))
-                        .overlay(
-                          RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.gray) , lineWidth: 1)
-                         )
-                    
-                }).padding()
-                
-                
-                Button(action: {
-                    print("FORGET PASSWORD")
-                }, label: {
-                    Text("FORGET PASSWORD?")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .frame(width: 200, height: 24)
-                        .foregroundStyle(Color("buttonTextColor"))
-                        .overlay(
-                          RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.gray) , lineWidth: 1)
-                         )
-                        .padding(.top)
-                    
-                })
-                .padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
-
-                
-                
-                Spacer()
             }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding()
+            
+            
+            
+            Button{
+                print("Login button")
+            } label: {
+                Text("Login")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color("buttonTextColor"))
+                    .padding()
+                
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color("buttonTextColor") , lineWidth: 1)
+            )
+            .padding(.horizontal,28)     
+            .padding(.top,12)
+
+            
+            
+            Button(action: {
+                print("FORGET PASSWORD")
+            }, label: {
+                Text("Forget Password?")
+                    .font(.footnote)
+                    .fontWeight(.semibold)
+                    .padding(.top)
+                    .padding(.trailing, 24)
+                
+            })
+            .frame(maxWidth: .infinity,alignment: .trailing)
+            
+            HStack{
+                Rectangle()
+                    .frame(height: 0.5)
+                Text("OR")
+                Rectangle()
+                    .frame(height: 0.5)
+            }
+            .padding(.horizontal,24)
+            .foregroundStyle(.gray)
+            
+            HStack{
+                
+                Image("facebook")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                
+                Text("Continue with facebook")
+                    .font(.footnote)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color(.systemBlue))
+                
+            }
+            .padding(.top, 8)
+            
+            Spacer()
+            
+            Divider()
+                .background(Color(.darkGray))
+            
+            
+            NavigationLink {
+                AddEmailView()
+                    .navigationBarBackButtonHidden(true)
+            } label: {
+                HStack{
+                    Text("Don't have a account?")
+                    
+                    Text("Sign up")
+                        .fontWeight(.semibold)
+                }
+                .padding(.vertical, 16)
+            }
+            
+            
         }
     }
 }
