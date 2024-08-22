@@ -14,29 +14,34 @@ struct SearchView: View {
         NavigationStack {
             ScrollView {
                 LazyVStack{
-                    ForEach(0...20, id: \.self){ user in
+                    ForEach(User.MOCK_USER){ user in
                         HStack(){
-                            Image("aydinKaya")
+                            Image(user.profileImageUrl ?? "")
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 40,height: 40)
+                                .frame(width: 50,height: 50)
                                 .clipShape(Circle())
                             
                             VStack(alignment: .leading){
-                                Text("AydinKaya")
+                                Text(user.username)
                                     .fontWeight(.semibold)
                                     .foregroundStyle(Color("buttonTextColor"))
+                                    .font(.subheadline)
                                 
-                                Spacer()
+                              
                                 
-                                Text("Aydın Kaya")
-                                    
+                                if let fullname = user.fullName{
+                                    Text(user.fullName ?? "")
                                     .foregroundStyle(Color("buttonTextColor"))
+                                    .font(.footnote)
+                                }
+                                    
+                                   
                             }
                             .font(.footnote)
                             Spacer()
                         }.padding(.horizontal, 30)
-
+                        
                     }
                 }
                 .searchable(text:$searchText, prompt: "Searchh..." )
