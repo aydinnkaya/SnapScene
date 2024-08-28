@@ -11,6 +11,7 @@ struct FeedView: View {
     var body: some View {
         NavigationStack{
             ScrollView {
+                
                 HStack {
                     Button(action: {}, label: {
                         Text("Snap Scene")
@@ -45,8 +46,8 @@ struct FeedView: View {
                     .padding(.trailing,4)
                     .frame(maxWidth: .infinity)
                 LazyVStack{
-                    ForEach(0...10, id: \.self){ post in
-                        FeedCellView()
+                    ForEach(Post.MOCK_POST){ post in
+                        FeedCellView(post: post)
                     }
                 }
                 

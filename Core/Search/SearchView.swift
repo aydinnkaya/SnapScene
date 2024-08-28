@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
+    
     @State private var searchText = ""
     
     var body: some View {
@@ -15,37 +16,41 @@ struct SearchView: View {
             ScrollView {
                 LazyVStack{
                     ForEach(User.MOCK_USER){ user in
-                        HStack(){
-                            Image(user.profileImageUrl ?? "")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50,height: 50)
-                                .clipShape(Circle())
-                            
-                            VStack(alignment: .leading){
-                                Text(user.username)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(Color("buttonTextColor"))
-                                    .font(.subheadline)
+                        NavigationLink(value: user) {
+                            HStack(){
+                                Image(user.profileImageUrl ?? "")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 50,height: 50)
+                                    .clipShape(Circle())
                                 
-                              
-                                
-                                if let fullname = user.fullName{
-                                    Text(user.fullName ?? "")
-                                    .foregroundStyle(Color("buttonTextColor"))
-                                    .font(.footnote)
-                                }
+                                VStack(alignment: .leading){
+                                    Text(user.username)
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(Color("buttonTextColor"))
+                                        .font(.subheadline)
                                     
-                                   
-                            }
-                            .font(.footnote)
-                            Spacer()
-                        }.padding(.horizontal, 30)
+                                  
+                                    
+                                    if user.fullName != nil{
+                                        Text(user.fullName ?? "")
+                                        .foregroundStyle(Color("buttonTextColor"))
+                                        .font(.footnote)
+                                    }
+                                       
+                                }
+                                .font(.footnote)
+                                Spacer()
+                            }.padding(.horizontal, 30)
+                        }
                         
                     }
                 }
                 .searchable(text:$searchText, prompt: "Searchh..." )
             }
+            .navigationDestination(for: User.self, destination: { user in
+                ProfileView(user: user)
+            })
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
             
