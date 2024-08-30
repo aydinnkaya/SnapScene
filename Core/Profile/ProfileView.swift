@@ -12,7 +12,7 @@ struct ProfileView: View {
     let user : User
     
     var posts : [Post] {
-        return Post.MOCK_POST.filter({$0.user?.username == user.username})
+        return Post.MOCK_POST.filter({$0.user?.username == user.username}) // $0 Current object
     }
     
     var body: some View {
