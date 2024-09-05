@@ -18,7 +18,7 @@ struct CompleteSignUpView: View {
                 
                 Spacer()
                 
-                Text("Welcome to Snap Scene , aydinkaya")
+                Text("Welcome to Snap Scene ,\(viewModel.username)")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundStyle(Color("buttonTextColor"))
@@ -29,6 +29,13 @@ struct CompleteSignUpView: View {
                     .foregroundStyle(.gray)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 24)
+                
+            
+                if !viewModel.errorMessage.isEmpty{
+                    Text(viewModel.errorMessage)
+                        .foregroundStyle(Color.red)
+                }
+                    
                 
                 
                 

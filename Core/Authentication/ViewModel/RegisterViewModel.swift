@@ -13,23 +13,56 @@ class RegisterViewModel: ObservableObject {
     @Published var username = ""
     @Published var email = ""
     @Published var password = ""
-    @Published var errorMessage: String? 
+    @Published var errorMessage = ""
     
-    func login() async throws {
-        do {
-            try await AuthService.shared.login(withEmail: email, password: password)
-        } catch {
-            throw error
-        }
-    }
+    
     
     func createUser() async throws {
+        
+        guard validate() else {
+            return
+        }
+        
         do {
             try await AuthService.shared.createUser(email: email, password: password, username: username)
+            username = ""
+            email = ""
+            password = ""
+            errorMessage = ""
+            
         } catch {
             throw error
         }
     }
+    
+    
+    func validate() -> Bool{
+        errorMessage = ""
+        
+        guard !email.trimmingCharacters(in: .whitespaces).isEmpty else {
+            errorMessage =  "Please enter email"
+            return false
+        }
+        
+        guard email.contains("@") && email.contains(".")  else {
+            errorMessage =  "Please enter a valid email"
+            return false
+        }
+        
+        guard !password.trimmingCharacters(in: .whitespaces).isEmpty else {
+            errorMessage =  "Please enter email"
+            return false
+        }
+        
+        guard password.count >= 6 else{
+            errorMessage = "Please enter a password longer than 6 characters"
+            return false
+        }
+        
+        
+        return true
+    }
+    
     
     func signout() async throws {
         do {

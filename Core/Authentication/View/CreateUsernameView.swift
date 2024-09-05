@@ -30,6 +30,7 @@ struct CreateUsernameView: View {
                     .padding(.horizontal, 24)
                 
                 TextField("Enter your username", text: $viewModel.username)
+                    .disableAutocorrection(true)
                     .textInputAutocapitalization(.none)
                     .modifier(SCTextFieldModifier())
                 

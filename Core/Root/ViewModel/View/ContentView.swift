@@ -13,16 +13,12 @@ struct ContentView: View {
     var body: some View {
         
         Group{
-            if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-            }
             if viewModel.userSession == nil {
                 LoginView()
-                    .environmentObject(registerViewModel) // Loginview with all page 
+                    .environmentObject(registerViewModel)   // Loginview with all page
             }
-            else {
-                MainTabView()
+            else if let currentUser = viewModel.currentUser{
+                MainTabView(user: currentUser)
             }
         }.onAppear {
             viewModel.setupSubscribers()

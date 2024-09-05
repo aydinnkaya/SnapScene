@@ -30,6 +30,7 @@ struct AddEmailView: View {
                     .padding(.horizontal, 24)
                 
                 TextField("Enter your email", text: $viewModel.email)
+                    .disableAutocorrection(true)
                     .textInputAutocapitalization(.none)
                     .modifier(SCTextFieldModifier())
                 

@@ -15,6 +15,7 @@ struct CurrentUserProfileView: View {
         return Post.MOCK_POST.filter({$0.user?.username == user.username})
     }
     
+    
     var body: some View {
         NavigationStack() {
             ScrollView {
@@ -27,7 +28,10 @@ struct CurrentUserProfileView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {}, label: {
+                        Button(action: {
+                            Task{try await AuthService.shared.signout()}
+                            
+                        }, label: {
                             Image(systemName: "line.3.horizontal")
                                 .tint(Color("buttonTextColor"))
                             

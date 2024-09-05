@@ -14,12 +14,11 @@ class ContentViewModel: ObservableObject {
     
     private let service = AuthService.shared
     private var cancellables = Set<AnyCancellable>()
-    
     @Published var userSession: FirebaseAuth.User?
     @Published var errorMessage: String?
+    @Published var currentUser : User?
     
-    init(userSession: FirebaseAuth.User? = nil) {
-        self.userSession = userSession
+    init() {
         setupSubscribers()
     }
     
@@ -31,10 +30,18 @@ class ContentViewModel: ObservableObject {
                 self?.userSession = userSession
             }
             .store(in: &cancellables)
+         
+         
+         service.$currentUser
+             .sink { [weak self] currentUser in    // retain cycle (hafıza sızıntısı riskini engellemek)
+                 self?.currentUser = currentUser
+             }
+             .store(in: &cancellables)
     }
     
     // ************
-    
+  
+    /*
     func login(email: String, password: String) {
         Task {
             do {
@@ -63,6 +70,7 @@ class ContentViewModel: ObservableObject {
             } catch {
                 self.errorMessage = "Failed to sign out: \(error.localizedDescription)"
             }
-        }
-    }
+        }*/
+    
+     
 }
