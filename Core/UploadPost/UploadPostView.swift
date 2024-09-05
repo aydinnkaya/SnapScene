@@ -54,7 +54,8 @@ struct UploadPostView: View {
             
             HStack(){
                 if let image = viewModel.postImage{
-                                        image
+                    
+                    image
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200,height: 200)

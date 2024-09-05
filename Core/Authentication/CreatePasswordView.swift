@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CreatePasswordView: View {
-    @State private var password = ""
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var viewModel : RegisterViewModel
     
     var body: some View {
         NavigationStack {
@@ -31,7 +31,7 @@ struct CreatePasswordView: View {
                 
                 
                 
-                SecureFieldWithdButton("Enter your password", text: $password)
+                SecureFieldWithdButton("Enter your password", text: $viewModel.password)
                 
                 
                 NavigationLink{
@@ -74,4 +74,5 @@ struct CreatePasswordView: View {
 
 #Preview {
     CreatePasswordView()
+        .environmentObject(RegisterViewModel())
 }

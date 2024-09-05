@@ -22,7 +22,7 @@ class UploadPostViewModel: ObservableObject {
     @Published var postImage: Image?
     
     func loadImage(fromItem item: PhotosPickerItem?) async {
-        guard let item = item else {
+        guard let item = item else {   // early exit
             return
         }
         
@@ -34,6 +34,7 @@ class UploadPostViewModel: ObservableObject {
                     // Ana iş parçacığında postImage'i güncelle
                     await MainActor.run {
                         self.postImage = Image(uiImage: uiImage)
+                    //MainActor.run ile postImage güncellenir. Bu kısım çok önemlidir çünkü SwiftUI'da kullanıcı arayüzü değişikliklerinin ana iş parçacığında (Main Thread) yapılması gerekir. Bu fonksiyon, bu durumu garanti eder.
                     }
                 } else {
                     print("Unable to convert data to UIImage.")
